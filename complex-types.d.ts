@@ -99,7 +99,10 @@ export type Matches<Value, Check> =
 export type Visitor<
   Visited extends Node = Node,
   Ancestor extends Parent = Parent
-> = (node: Visited, ancestors: Ancestor[]) => VisitorResult
+> = (
+  node: Visited,
+  ancestors: Ancestor[]
+) => VisitorResult | Promise<VisitorResult>
 
 export type BuildVisitor<
   Tree extends Node = Node,

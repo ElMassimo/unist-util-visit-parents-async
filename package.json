@@ -1,7 +1,7 @@
 {
-  "name": "unist-util-visit-parents",
+  "name": "unist-util-visit-parents-async",
   "version": "5.1.0",
-  "description": "unist utility to recursively walk over nodes, with ancestral information",
+  "description": "unist-util-visit-parents supporting async visitor",
   "license": "MIT",
   "keywords": [
     "unist",
@@ -25,6 +25,7 @@
   },
   "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
   "contributors": [
+    "Máximo Mussini <maximomussini@gmail.com> (https://maximomussini.com)",
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
   "sideEffects": false,

@@ -36,8 +36,8 @@ export const EXIT = false
 export const visitParents =
   /**
    * @type {(
-   *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
-   *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
+   *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => Promise<void>) &
+   *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => Promise<void>)
    * )}
    */
   (
@@ -47,7 +47,7 @@ export const visitParents =
      * @param {import('./complex-types').Visitor<Node>} visitor
      * @param {boolean} [reverse]
      */
-    function (tree, test, visitor, reverse) {
+    async function (tree, test, visitor, reverse) {
       if (typeof test === 'function' && typeof visitor !== 'function') {
         reverse = visitor
         // @ts-expect-error no visitor given, so `visitor` is test.
@@ -58,7 +58,7 @@ export const visitParents =
       const is = convert(test)
       const step = reverse ? -1 : 1
 
-      factory(tree, null, [])()
+      await factory(tree, null, [])()
 
       /**
        * @param {Node} node
@@ -90,7 +90,7 @@ export const visitParents =
 
         return visit
 
-        function visit() {
+        async function visit() {
           /** @type {ActionTuple} */
           let result = []
           /** @type {ActionTuple} */
@@ -101,7 +101,7 @@ export const visitParents =
           let grandparents
 
           if (!test || is(node, index, parents[parents.length - 1] || null)) {
-            result = toResult(visitor(node, parents))
+            result = toResult(await visitor(node, parents))
 
             if (result[0] === EXIT) {
               return result
