@@ -58,7 +58,7 @@ export const visitParents =
       const is = convert(test)
       const step = reverse ? -1 : 1
 
-      await factory(tree, null, [])()
+      await (factory(tree, null, [])())
 
       /**
        * @param {Node} node
@@ -118,7 +118,7 @@ export const visitParents =
             // @ts-expect-error looks like a parent.
             while (offset > -1 && offset < node.children.length) {
               // @ts-expect-error looks like a parent.
-              subresult = factory(node.children[offset], offset, grandparents)()
+              subresult = await (factory(node.children[offset], offset, grandparents)())
 
               if (subresult[0] === EXIT) {
                 return subresult

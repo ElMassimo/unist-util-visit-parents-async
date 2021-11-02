@@ -1,6 +1,6 @@
 {
   "name": "unist-util-visit-parents-async",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "unist-util-visit-parents supporting async visitor",
   "license": "MIT",
   "keywords": [
